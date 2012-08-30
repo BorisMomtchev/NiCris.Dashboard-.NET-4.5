@@ -20,7 +20,7 @@ namespace NiCris.Client.BusinessStream
                 var device = new Device("Serial: " + i.ToString(), DateTime.Now.AddYears(-i * 2));
 
                 Patient.Save(patient);
-                // Device.Save(device);
+                Device.Save(device);
             }
         }
     }

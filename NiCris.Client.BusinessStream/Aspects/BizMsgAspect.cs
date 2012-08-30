@@ -49,20 +49,26 @@ namespace NiCris.Client.BusinessStream.Aspects
         {
             // Trace.WriteLine(MethodName + "\n\n - OnEntry");
             Trace.WriteLine(string.Format("Name: {0}, Date: {1}, User: {2}", Name, Date.ToString(), User));
-            // Trace.WriteLine(string.Format("MethodName: {0}", MethodName));
-            // Trace.WriteLine(args.Method.DeclaringType.Name);
+            Trace.WriteLine(string.Format("MethodName: {0}", MethodName));
+            Trace.WriteLine(args.Method.DeclaringType.Name);
 
-            // 1. Need index of the arg; 2. Name of the property
+            // TODOs:
+            // 1. Find the index of the arg
+            // 2. Use the name of the property; shall be specified in the this.Name by convention
+            // 3. Get the value; construct the BizMsg and send to REST
             var oVal = args.Arguments.GetArgument(0);
             Trace.WriteLine(args.Method.DeclaringType.GetProperty(Name).GetValue(oVal, null));
 
+            /*
             var val = GetPropValue(oVal, Name);
             Trace.WriteLine(val);
+            */
 
-            // Type oType = args.Method.GetParameters()[0].ParameterType;
-            // var con = Convert.ChangeType(oVal, oType);
-            // Trace.WriteLine(con);
-            // var t = Activator.CreateInstance(oType, oVal);
+            /*
+            Type oType = args.Method.GetParameters()[0].ParameterType;
+            var con = Convert.ChangeType(oVal, oType);
+            var someObj = Activator.CreateInstance(oType, oVal);
+            */
         }
 
         // This method is executed at runtime inside your application, when target methods exit with success
@@ -93,7 +99,6 @@ namespace NiCris.Client.BusinessStream.Aspects
         {
             return (T)Convert.ChangeType(input, typeof(T));
         }
-
 
     }
 }
