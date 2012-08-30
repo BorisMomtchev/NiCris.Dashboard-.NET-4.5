@@ -103,8 +103,9 @@ namespace NiCris.AutoTester.Services
                 message.Responce = response.Content.ReadAsString();
                 statusCode = response.StatusCode.ToString();
 
-                // Set the Id for further processing; AbsolutePath is something like /BizMsgService/314
-                message.Id = response.Headers.Location.AbsolutePath.Split('/')[2];
+                // Set the Id for further processing; AbsolutePath is something like /BizMsgService/314 OR /api/BizMsgService/314 
+                string[] segments = response.Headers.Location.AbsolutePath.Split('/');
+                message.Id = segments[segments.Length-1];
             }
 
             if (inSeries)
