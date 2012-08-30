@@ -30,23 +30,33 @@ namespace NiCris.HttpClient.NET4._5
             handler.Credentials = new NetworkCredential("Boris", "xyzxyz");
             var client = new System.Net.Http.HttpClient(handler);
 
-            BizMsgDTO bizMsg = new BizMsgDTO
+            var bizMsgDTO = new BizMsgDTO
             {
                 Name = "Boris",
                 Date = DateTime.Now,
                 User = "Boris.Momtchev",
             };
 
-            // Post contact
-            Uri address = new Uri(_baseAddress, "/api/BizMsg");
-            HttpResponseMessage response = await client.PostAsJsonAsync(address.ToString(), bizMsg);
+            // *** POST/CREATE BizMsg
+            Uri address = new Uri(_baseAddress, "/api/BizMsgService");
+            HttpResponseMessage response = await client.PostAsJsonAsync(address.ToString(), bizMsgDTO);
 
             // Check that response was successful or throw exception
-            response.EnsureSuccessStatusCode();
+            // response.EnsureSuccessStatusCode();
 
-            // Read result as Contact
-            BizMsg result = await response.Content.ReadAsAsync<BizMsg>();
-            Console.WriteLine("Result: Name: {0}, Date: {1}, User: {2}, Id: {3}", result.Name, result.Date.ToString(), result.User, result.Id);
+            // BizMsg result = await response.Content.ReadAsAsync<BizMsg>();
+            // Console.WriteLine("Result: Name: {0}, Date: {1}, User: {2}, Id: {3}", result.Name, result.Date.ToString(), result.User, result.Id);
+            Console.WriteLine(response.StatusCode + " - " + response.Headers.Location);
+
+            // *** PUT/UPDATE BizMsg
+            var testID = response.Headers.Location.AbsolutePath.Split('/')[3];
+            bizMsgDTO.Name = "Boris Momtchev";
+            response = await client.PutAsJsonAsync(address.ToString() + "/" + testID, bizMsgDTO);
+            Console.WriteLine(response.StatusCode);
+
+            // *** DELETE BizMsg
+            response = await client.DeleteAsync(address.ToString() + "/" + testID);
+            Console.WriteLine(response.StatusCode);
         }
     }
 

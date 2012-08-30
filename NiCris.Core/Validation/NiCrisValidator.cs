@@ -1,4 +1,4 @@
-﻿/* Model Validation
+﻿/* Model NiCrisValidator
  * 
  * Provides the public access to the DataAnnotationsValidationRunner.
  * 
@@ -11,7 +11,7 @@ using System.Text;
 
 namespace NiCris.Core.Validation
 {
-    public static class Validator
+    public static class NiCrisValidator
     {
         public static IEnumerable<ErrorInfo> Check(object instance)
         {

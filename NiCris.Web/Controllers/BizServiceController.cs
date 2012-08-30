@@ -3,15 +3,18 @@ using NiCris.CoreServices.Interfaces;
 using NiCris.CoreServices.Services;
 using NiCris.DataAccess.SQL.Repositories;
 using NiCris.Web.Models;
+using System;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace NiCris.Web.Controllers
 {
-    public class BizMsgController : ApiController
+    public class BizServiceController : ApiController
     {
         IBizMsgCoreService _bizMsgCoreService;
 
-        public BizMsgController()
+        public BizServiceController()
         {
             _bizMsgCoreService = new BizMsgCoreService(new BizMsgRepository());
         }
@@ -32,32 +35,28 @@ namespace NiCris.Web.Controllers
         }
 
         // POST api/bizmsg
-        public BizMsg Post(BizMsgDTO bizMsgDTO)
+        public HttpResponseMessage Post(BizMsg bizMsg)
         {
-            var bizMsg = new BizMsg();
-            bizMsg.Name = bizMsgDTO.Name;
-            bizMsg.Date = bizMsgDTO.Date;
-            bizMsg.User = bizMsgDTO.User;
-
             // Save to db
             int id =_bizMsgCoreService.Insert(bizMsg);
             
-            // TODO: Set the Http Location header
+            // Set the Http Location header
+            var response = new HttpResponseMessage(HttpStatusCode.Created);
+            response.Headers.Location = new Uri(Request.RequestUri, "/api/BizService/" + id.ToString());
 
-            // Return the full object for now...
-            return bizMsg;
+            return response;
         }
 
 
         // PUT api/bizmsg/5
-        public void Put(int id, BizMsgDTO bizMsgDTO)
-        {
-        }
+        //public void PutBizMsg(int id, BizMsg bizMsg)
+        //{
+        //}
 
         // DELETE api/bizmsg/5
-        public void Delete(int id)
-        {
-        }
+        //public void DeleteBizMsg(int id)
+        //{
+        //}
 
     }
 }

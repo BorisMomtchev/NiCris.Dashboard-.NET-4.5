@@ -6,6 +6,8 @@ using NiCris.Core.Validation;
 using NiCris.DataAccess.Interfaces;
 using NiCris.DataAccess.SQL.LinqToSQL;
 using NiCris.DataAccess.SQL.Mappers;
+using System.ComponentModel.DataAnnotations;
+// using NiCris.Core.Exceptions;
 
 namespace NiCris.DataAccess.SQL.Repositories
 {
@@ -34,9 +36,9 @@ namespace NiCris.DataAccess.SQL.Repositories
         public int Insert(BusinessObjects.BizMsg model)
         {
             // Validate the BO
-            var errorInfo = Validator.Check(model);
+            var errorInfo = NiCrisValidator.Check(model);
             if (errorInfo.Count() > 0)
-                throw new Exception("Validation error(s) occurred! Please make sure all validation rules are met.");
+                throw new ValidationException("Validation error(s) occurred! Please make sure all validation rules are met.");
 
             NiCris.DataAccess.SQL.LinqToSQL.BizMsg entity = BizMsgMapper.ToEntity(model);
 
@@ -78,9 +80,9 @@ namespace NiCris.DataAccess.SQL.Repositories
         public int Update(BusinessObjects.BizMsg model)
         {
             // Validate the BO
-            var errorInfo = Validator.Check(model);
+            var errorInfo = NiCrisValidator.Check(model);
             if (errorInfo.Count() > 0)
-                throw new Exception("Validation error(s) occurred! Please make sure all validation rules are met.");
+                throw new ValidationException("Validation error(s) occurred! Please make sure all validation rules are met.");
 
             NiCris.DataAccess.SQL.LinqToSQL.BizMsg entity = BizMsgMapper.ToEntity(model);
 

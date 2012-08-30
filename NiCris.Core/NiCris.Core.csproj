@@ -41,10 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\ValidationException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\DataAnnotationsValidationRunner.cs" />
     <Compile Include="Validation\ErrorInfo.cs" />
-    <Compile Include="Validation\Validator.cs" />
+    <Compile Include="Validation\NiCrisValidator.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
