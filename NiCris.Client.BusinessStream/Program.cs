@@ -1,10 +1,10 @@
 ﻿using NiCris.Client.BusinessStream.Aspects;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Diagnostics;
 
 namespace NiCris.Client.BusinessStream
 {
@@ -14,60 +14,53 @@ namespace NiCris.Client.BusinessStream
         {
             System.Diagnostics.Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
 
-            FirstMethod();
-            SecondMethod();
+            for (int i = 0; i < 2; i++)
+            {
+                var patient = new Patient("FullName: " + i.ToString(), i + 20, DateTime.Now.AddYears(-i));
+                var device = new Device("Serial: " + i.ToString(), DateTime.Now.AddYears(-i * 2));
 
-            Console.WriteLine("\nPress any key to continue with BizMsgAspect");
-            Console.ReadKey();
-
-            var someObj = new SomeObject(314, "pi");
-            ThirdMethod(123, someObj);
-
-            // Console.WriteLine("\nPress any key to exit");
-            // Console.ReadKey();
+                Patient.Save(patient);
+                // Device.Save(device);
+            }
         }
-
-        [LogAspect]
-        [ExceptionAspect]
-        static void FirstMethod()
-        {
-            throw new DivideByZeroException("An Error Occured...");
-        }
-
-        [LogAspect]
-        [TimingAspect]
-        [SimpleTraceAttribute]
-        static void SecondMethod()
-        {
-            Thread.Sleep(100);
-            SecondMethodEx();
-        }
-        static void SecondMethodEx()
-        {
-            Thread.Sleep(200);
-        }
-
-
-        [TimingAspect]
-        [ExceptionAspect]
-        [BizMsgAspect("BizMsg_Name", "SomeUser", AppId = "AppID:100")]
-        static void ThirdMethod(int someInt, SomeObject someObj)
-        {
-            Thread.Sleep(1000);
-            throw new Exception("Test Exception Msg.");
-        }
-
     }
 
-    public class SomeObject
+    public class Patient 
     {
-        public int XYZ { get; private set; }
-        public string ABC { get; private set; }
+        public string FullName { get; set; }
+        public int Age { get; set; }
+        public DateTime DOB { get; set; }
 
-        public SomeObject(int xyz, string abc)
+        public Patient(){}
+        public Patient(string fullName, int age, DateTime dob)
         {
-            this.XYZ = xyz;
-            this.ABC = abc;
+            this.FullName = fullName;
+            this.Age = age;
+            this.DOB = dob;
+        }
+
+        [BizMsgAspect("FullName", AppId = "Patient")]
+        public static void Save(Patient patient)
+        {
+            Thread.Sleep(100);
+        }
+    }
+
+    public class Device
+    {
+        public string Serial { get; set; }
+        public DateTime ReleaseDate { get; set; }
+
+        public Device(string serial, DateTime releaseDate)
+        {
+            this.Serial = serial;
+            this.ReleaseDate = releaseDate;
+        }
+
+        [BizMsgAspect("Serial", AppId = "Device")]
+        public static void Save(Device device)
+        {
+            Thread.Sleep(100);
         }
     }
 }

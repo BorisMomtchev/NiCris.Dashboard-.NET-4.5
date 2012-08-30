@@ -48,16 +48,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aspects\BizMsgAspect.cs" />
+    <Compile Include="Aspects\BizMsgAspectTest.cs" />
     <Compile Include="Aspects\ExceptionAspect.cs" />
     <Compile Include="Aspects\LogAspect.cs" />
     <Compile Include="Aspects\SimpleTraceAttribute.cs" />
     <Compile Include="Aspects\TimingAspect.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="TestAspects.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequiresPostSharp.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
