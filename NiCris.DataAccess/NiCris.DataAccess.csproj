@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IBizMsgExRepository.cs" />
     <Compile Include="Interfaces\IBizMsgRepository.cs" />
     <Compile Include="Interfaces\ICRUDRepository.cs" />
     <Compile Include="Interfaces\ILookupRepository.cs" />
@@ -58,7 +59,9 @@
       <DependentUpon>Database.dbml</DependentUpon>
     </Compile>
     <Compile Include="SQL\LinqToSQL\DataContextFactory.cs" />
+    <Compile Include="SQL\Mappers\BizMsgExMapper.cs" />
     <Compile Include="SQL\Mappers\BizMsgMapper.cs" />
+    <Compile Include="SQL\Repositories\BizMsgExRepository.cs" />
     <Compile Include="SQL\Repositories\BizMsgRepository.cs" />
     <Compile Include="SQL\Repositories\LookupRepository.cs" />
     <Compile Include="VersionConverter.cs" />
@@ -73,7 +76,6 @@
       <Name>NiCris.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">

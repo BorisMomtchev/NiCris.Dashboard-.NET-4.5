@@ -11,6 +11,7 @@ namespace NiCris.BusinessObjects
         [Required(ErrorMessage = "Name is required.")]
         public string Name { get; set; }
 
+        // Derived at Runtime
         [Required(ErrorMessage = "Date is required.")]
         public DateTime Date { get; set; }              
 

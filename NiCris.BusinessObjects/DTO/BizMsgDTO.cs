@@ -9,6 +9,8 @@ namespace NiCris.BusinessObjects
     {
         // Required
         public string Name { get; set; }
+
+        // Derived at Runtime
         public DateTime Date { get; set; }
         public string User { get; set; }
 

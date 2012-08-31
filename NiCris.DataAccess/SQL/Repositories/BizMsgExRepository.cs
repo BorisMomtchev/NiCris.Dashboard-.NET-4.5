@@ -1,52 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Linq;
-using System.Linq;
-using NiCris.Core.Validation;
+﻿using NiCris.Core.Validation;
 using NiCris.DataAccess.Interfaces;
 using NiCris.DataAccess.SQL.LinqToSQL;
 using NiCris.DataAccess.SQL.Mappers;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-// using NiCris.Core.Exceptions;
+using System.Data.Linq;
+using System.Linq;
 
 namespace NiCris.DataAccess.SQL.Repositories
 {
-    public class BizMsgRepository : IBizMsgRepository
+    public class BizMsgExRepository : IBizMsgExRepository
     {
-        #region ICRUDRepository<BizMsg> Members
+        #region ICRUDRepository<BizMsgEx> Members
 
-        public IList<BusinessObjects.BizMsg> GetAll()
+        public IList<BusinessObjects.BizMsgEx> GetAll()
         {
             using (Database db = DataContextFactory.CreateContext())
             {
-                return db.BizMsgs.Select(x => BizMsgMapper.ToBusinessObject(x)).ToList();
+                return db.BizMsgsExes.Select(x => BizMsgExMapper.ToBusinessObject(x)).ToList();
             }
         }
 
-        public BusinessObjects.BizMsg GetById(int id)
+        public BusinessObjects.BizMsgEx GetById(int id)
         {
             using (Database db = DataContextFactory.CreateContext())
             {
-                return BizMsgMapper.ToBusinessObject(db.BizMsgs
+                return BizMsgExMapper.ToBusinessObject(db.BizMsgsExes
                     .Where(x => x.Id == id)
                     .SingleOrDefault());
             }
         }
 
-        public int Insert(BusinessObjects.BizMsg model)
+        public int Insert(BusinessObjects.BizMsgEx model)
         {
             // Validate the BO
             var errorInfo = NiCrisValidator.Check(model);
             if (errorInfo.Count() > 0)
                 throw new ValidationException("Validation error(s) occurred! Please make sure all validation rules are met.");
 
-            NiCris.DataAccess.SQL.LinqToSQL.BizMsg entity = BizMsgMapper.ToEntity(model);
+            NiCris.DataAccess.SQL.LinqToSQL.BizMsgsEx entity = BizMsgExMapper.ToEntity(model);
 
             using (Database db = DataContextFactory.CreateContext())
             {
                 try
                 {
-                    db.BizMsgs.InsertOnSubmit(entity);
+                    db.BizMsgsExes.InsertOnSubmit(entity);
                     db.SubmitChanges();
 
                     model.Id = entity.Id;
@@ -77,20 +76,20 @@ namespace NiCris.DataAccess.SQL.Repositories
 
         }
 
-        public int Update(BusinessObjects.BizMsg model)
+        public int Update(BusinessObjects.BizMsgEx model)
         {
             // Validate the BO
             var errorInfo = NiCrisValidator.Check(model);
             if (errorInfo.Count() > 0)
                 throw new ValidationException("Validation error(s) occurred! Please make sure all validation rules are met.");
 
-            NiCris.DataAccess.SQL.LinqToSQL.BizMsg entity = BizMsgMapper.ToEntity(model);
+            NiCris.DataAccess.SQL.LinqToSQL.BizMsgsEx entity = BizMsgExMapper.ToEntity(model);
 
             using (Database db = DataContextFactory.CreateContext())
             {
                 try
                 {
-                    db.BizMsgs.Attach(entity, true);
+                    db.BizMsgsExes.Attach(entity, true);
                     db.SubmitChanges();
 
                     model.Id = entity.Id;
@@ -121,16 +120,16 @@ namespace NiCris.DataAccess.SQL.Repositories
 
         }
 
-        public void Delete(BusinessObjects.BizMsg model)
+        public void Delete(BusinessObjects.BizMsgEx model)
         {
-            NiCris.DataAccess.SQL.LinqToSQL.BizMsg entity = BizMsgMapper.ToEntity(model);
+            NiCris.DataAccess.SQL.LinqToSQL.BizMsgsEx entity = BizMsgExMapper.ToEntity(model);
 
             using (Database db = DataContextFactory.CreateContext())
             {
                 try
                 {
-                    db.BizMsgs.Attach(entity, false);
-                    db.BizMsgs.DeleteOnSubmit(entity);
+                    db.BizMsgsExes.Attach(entity, false);
+                    db.BizMsgsExes.DeleteOnSubmit(entity);
                     db.SubmitChanges();
                 }
                 catch (ChangeConflictException)

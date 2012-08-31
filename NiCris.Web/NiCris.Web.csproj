@@ -129,12 +129,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BizMsgExServiceController.cs" />
     <Compile Include="Controllers\BizMsgServiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\ValidateAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BizMsgExList.cs" />
     <Compile Include="Models\BizMsgList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

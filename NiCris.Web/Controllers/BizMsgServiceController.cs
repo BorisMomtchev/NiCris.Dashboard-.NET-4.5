@@ -82,12 +82,12 @@ namespace NiCris.Web.Controllers
         // DELETE api/BizMsgService/5
         public HttpResponseMessage Delete(int id)
         {
-            var bizMsgToUpd = _bizMsgCoreService.GetById(id);
-            if (bizMsgToUpd == null)
+            var bizMsgToDel = _bizMsgCoreService.GetById(id);
+            if (bizMsgToDel == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
             // Delete in db
-            _bizMsgCoreService.Delete(bizMsgToUpd);
+            _bizMsgCoreService.Delete(bizMsgToDel);
 
             var response = new HttpResponseMessage(HttpStatusCode.OK);
             return response;

@@ -8,9 +8,9 @@ using System.Diagnostics;
 
 namespace NiCris.Client.BusinessStream
 {
-    class TestAspects
+    class TestAspects_1
     {
-        static void MainXYZ(string[] args)
+        static void Main_1(string[] args)
         {
             System.Diagnostics.Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
 
@@ -50,7 +50,7 @@ namespace NiCris.Client.BusinessStream
 
         [TimingAspect]
         [ExceptionAspect]
-        [BizMsgAspectTest("BizMsg_Name", "SomeUser", AppId = "AppID:100")]
+        [BizMsgAspect_1("BizMsg_Name", "SomeUser", AppId = "AppID:100")]
         static void ThirdMethod(int someInt, SomeObject someObj)
         {
             Thread.Sleep(1000);

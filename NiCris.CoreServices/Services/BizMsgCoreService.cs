@@ -11,7 +11,7 @@ namespace NiCris.CoreServices.Services
     public class BizMsgCoreService : IBizMsgCoreService
     {
         // Fields & Properties
-        IBizMsgRepository BusinessMsgRepository { get; set; }
+        IBizMsgRepository BizMsgRepository { get; set; }
 
         // C~tors
         public BizMsgCoreService() : this(new BizMsgRepository())
@@ -20,34 +20,34 @@ namespace NiCris.CoreServices.Services
 
         public BizMsgCoreService(IBizMsgRepository businessMsgRepository)
         {
-            BusinessMsgRepository = businessMsgRepository;
+            BizMsgRepository = businessMsgRepository;
         }
 
-        #region ICRUDService<BusinessMsg> Members
+        #region ICRUDService<BizMsg> Members
 
         public IList<BusinessObjects.BizMsg> GetAll()
         {
-            return BusinessMsgRepository.GetAll().ToList();
+            return BizMsgRepository.GetAll().ToList();
         }
 
         public BusinessObjects.BizMsg GetById(int id)
         {
-            return BusinessMsgRepository.GetById(id);
+            return BizMsgRepository.GetById(id);
         }
 
         public int Insert(BusinessObjects.BizMsg model)
         {
-            return BusinessMsgRepository.Insert(model);
+            return BizMsgRepository.Insert(model);
         }
 
         public int Update(BusinessObjects.BizMsg model)
         {
-            return BusinessMsgRepository.Update(model);
+            return BizMsgRepository.Update(model);
         }
 
         public void Delete(BusinessObjects.BizMsg model)
         {
-            BusinessMsgRepository.Delete(model);
+            BizMsgRepository.Delete(model);
         }
 
         #endregion

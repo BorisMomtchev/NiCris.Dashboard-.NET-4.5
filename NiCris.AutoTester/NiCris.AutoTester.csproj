@@ -80,6 +80,7 @@
     <Content Include="XmlConfigFiles\BizMsg_CRU.xml" />
     <Content Include="XmlConfigFiles\BizMsg_DYN.xml" />
     <Content Include="XmlConfigFiles\BizMsg_CRUD_WebAPI.xml" />
+    <Content Include="XmlConfigFiles\BizMsgEx_CRUD_WebAPI.xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
