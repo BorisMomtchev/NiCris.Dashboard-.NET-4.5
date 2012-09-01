@@ -11,7 +11,7 @@ namespace NiCris.Client.BusinessStream
         {
             Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 50; i++)
             {
                 var patient = new Patient2("FullName: " + i.ToString(), i + 20, DateTime.Now.AddYears(-i));
                 var device = new Device2("Serial: " + i.ToString(), DateTime.Now.AddYears(-i * 2));
@@ -36,6 +36,7 @@ namespace NiCris.Client.BusinessStream
         }
 
         [BizMsgExAspect("FullName", "Save Patient2")]
+        [TimingAspect]
         public static void Save(Patient2 patient)
         {
             Thread.Sleep(100);
@@ -54,6 +55,7 @@ namespace NiCris.Client.BusinessStream
         }
 
         [BizMsgExAspect("Serial", "Update Device2")]
+        [TimingAspect]
         public static void Update(Device2 device)
         {
             Thread.Sleep(100);
