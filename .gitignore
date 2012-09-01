@@ -63,4 +63,5 @@ packages/
 *.testsettings
 
 #Database Files
-[Dd]ata/
+Data/
+
