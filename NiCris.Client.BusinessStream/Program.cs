@@ -39,7 +39,7 @@ namespace NiCris.Client.BusinessStream
         [TimingAspect]
         public static void Save(Patient2 patient)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(200);
         }
     }
 
@@ -58,7 +58,7 @@ namespace NiCris.Client.BusinessStream
         [TimingAspect]
         public static void Update(Device2 device)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(200);
         }
     }
 }

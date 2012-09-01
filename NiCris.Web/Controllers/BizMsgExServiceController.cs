@@ -2,6 +2,7 @@
 using NiCris.CoreServices.Interfaces;
 using NiCris.CoreServices.Services;
 using NiCris.DataAccess.SQL.Repositories;
+using NiCris.Web.Hubs;
 using NiCris.Web.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -59,6 +60,10 @@ namespace NiCris.Web.Controllers
             // Set the Http Location header & return
             var response = new HttpResponseMessage(HttpStatusCode.Created);
             response.Headers.Location = new Uri(Request.RequestUri, "/api/BizMsgExService/" + bizMsgEx.Id.ToString());
+
+            // Inform all connected Clients via our Notifier
+            Notifier.Send(bizMsgEx.EntityValue);
+
             return response;
         }
 

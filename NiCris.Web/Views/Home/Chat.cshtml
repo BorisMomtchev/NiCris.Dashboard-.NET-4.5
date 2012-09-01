@@ -23,6 +23,21 @@
           chat.send($('#msg').val());
       });
       
+      // Only from server
+      var counter = 0;
+      chat.addMessageEx = function (message) {
+          var $res = $("<li />");
+          $res.append(message);
+          $res.appendTo($('#messagesEx'));
+
+          if (counter > 5) {
+              $('#messagesEx li').eq(counter - 6).slideUp();
+          }
+          // $('#messagesEx li:first').slideUp(function () { $(this).appendTo($('#messagesEx')).slideDown(); });
+          counter++;
+      };
+      $('#msgExFlow').show();
+
       // Start the connection
       $.connection.hub.start();
   });
@@ -30,6 +45,59 @@
   
   <input type="text" id="msg" />
   <input type="button" id="broadcast" value="broadcast" />
-  <ul id="messages"></ul>
+
+   @* Chat *@ 
+    <ul id="messages"></ul>
+    <hr/>
+
+  @* Business Stream *@
+    <div id="page">
+        <span id="msgExFlow">
+            <h2>Live Business Stream</h2>
+            <ul id="messagesEx" class="ticker"></ul>
+        </span>
+    </div>
+
+
+<style>
+
+    #page {
+	    width: 640px;
+	    margin: 0 auto;
+	    background-color: #FFF;
+	    margin-bottom: 50px;
+    } 
+
+    .ticker {
+	    width: 640px;
+	    height: 120px;
+	    overflow: hidden;
+	    border: 1px solid #DDD;
+	    margin: 0;
+	    padding: 0;
+	    list-style: none;
+	    border-radius: 5px;
+	    box-shadow: 0px 0px 5px #DDD;
+    }
+
+    .ticker li {
+	    height: 30px;
+	    border-bottom: 1px dotted #DDD;
+	    padding: 5px;
+	    margin: 0px 5px;
+        font-size:larger;
+        font-weight:bold;
+	    box-shadow: 0px 0px 5px #DDD;
+    }
+
+    #messagesEx {
+	    height: 300px;
+    }
+
+    #messagesEx li {
+	    height: 40px;
+	    overflow: hidden;
+    }
+</style>
 
 @*https://github.com/SignalR/SignalR/wiki/QuickStart-Hubs*@
