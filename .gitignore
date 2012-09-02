@@ -64,4 +64,5 @@ packages/
 
 #Database Files
 Data/
-
+*.mdf
+*.ldf
