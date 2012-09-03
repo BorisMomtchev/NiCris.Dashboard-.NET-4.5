@@ -28,6 +28,7 @@
       chat.addMessageEx = function (message) {
           var $res = $("<li />");
           $res.append(message);
+          $res.addClass("regularitem");
           $res.appendTo($('#messagesEx'));
 
           if (counter > 5) {
@@ -62,31 +63,22 @@
 <style>
 
     #page {
-	    width: 640px;
+	    width: 900px;
 	    margin: 0 auto;
-	    background-color: #FFF;
 	    margin-bottom: 50px;
     } 
 
     .ticker {
-	    width: 640px;
-	    height: 120px;
-	    overflow: hidden;
-	    border: 1px solid #DDD;
-	    margin: 0;
-	    padding: 0;
-	    list-style: none;
-	    border-radius: 5px;
-	    box-shadow: 0px 0px 5px #DDD;
+	    width: 850px;
     }
 
     .ticker li {
-	    height: 30px;
+	    height: 40px;
 	    border-bottom: 1px dotted #DDD;
 	    padding: 5px;
 	    margin: 0px 5px;
-        font-size:larger;
-        font-weight:bold;
+        font-size: larger;
+        font-weight: bold;
 	    box-shadow: 0px 0px 5px #DDD;
     }
 
@@ -98,6 +90,32 @@
 	    height: 40px;
 	    overflow: hidden;
     }
+
+    .regularitem {
+        list-style: none outside none;
+        margin: 10px;
+        padding: 10px;
+        width: 850px;
+
+        background-image: linear-gradient(left top, rgb(245,37,172) 17%, rgb(152,71,222) 59%);
+        background-image: -o-linear-gradient(left top, rgb(245,37,172) 17%, rgb(152,71,222) 59%);
+        background-image: -moz-linear-gradient(left top, rgb(245,37,172) 17%, rgb(152,71,222) 59%);
+        background-image: -webkit-linear-gradient(left top, rgb(245,37,172) 17%, rgb(152,71,222) 59%);
+        background-image: -ms-linear-gradient(left top, rgb(245,37,172) 17%, rgb(152,71,222) 59%);
+
+        background-image: -webkit-gradient(
+          linear,
+          left top,
+          right bottom,
+          color-stop(0.17, rgb(245,37,172)),
+          color-stop(0.59, rgb(152,71,222))
+        );
+
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+    }
+
 </style>
 
 @*https://github.com/SignalR/SignalR/wiki/QuickStart-Hubs*@
