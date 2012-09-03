@@ -62,7 +62,6 @@ packages/
 #Test files
 *.testsettings
 
-#Database Files
-Data/
+# Database Files
 *.mdf
 *.ldf
