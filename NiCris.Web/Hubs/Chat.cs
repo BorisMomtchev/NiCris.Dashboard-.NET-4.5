@@ -1,4 +1,6 @@
-﻿using SignalR;
+﻿using Newtonsoft.Json;
+using NiCris.BusinessObjects;
+using SignalR;
 using SignalR.Hubs;
 using System;
 using System.Collections.Generic;
@@ -18,10 +20,11 @@ namespace NiCris.Web.Hubs
 
     public class Notifier
     {
-        public static void Send(string message)
+        public static void Send(BizMsgEx bizMsgEx)
         {
             var context = GlobalHost.ConnectionManager.GetHubContext<Chat>();
-            context.Clients.addMessageEx(message);
+            string json = JsonConvert.SerializeObject(bizMsgEx);
+            context.Clients.addMessageEx(json);
         }
     }
 }

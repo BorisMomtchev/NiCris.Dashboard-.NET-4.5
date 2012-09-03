@@ -24,12 +24,17 @@
       });
       
       // Only from server
-      chat.addMessageEx = function (message) {
+      chat.addMessageEx = function (bizMsgEx) {
+          // Parse to json object
+          var bizMsgExObj = JSON.parse(bizMsgEx);
+
+          // Prep the li element
           var $res = $("<li />").css("display", "none");
-          $res.append(message);
+          $res.append(bizMsgExObj.EntityValue + " -- " + bizMsgExObj.User + " -- " + new Date(bizMsgExObj.Date).toUTCString());
           $res.addClass("regularitem");
           $res.appendTo($('#messagesEx')).slideDown();
 
+          // slideUp & remove from DOM logic
           if ($("#messagesEx li").size() > 7) {
               $('#messagesEx li').first().next().slideUp();
               $('#messagesEx li').first().remove();

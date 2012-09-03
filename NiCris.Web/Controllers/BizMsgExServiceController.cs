@@ -62,7 +62,7 @@ namespace NiCris.Web.Controllers
             response.Headers.Location = new Uri(Request.RequestUri, "/api/BizMsgExService/" + bizMsgEx.Id.ToString());
 
             // Inform all connected Clients via our Notifier
-            Notifier.Send(bizMsgEx.EntityValue);
+            Notifier.Send(bizMsgEx);
 
             return response;
         }
