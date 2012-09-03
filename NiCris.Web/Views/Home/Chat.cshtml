@@ -24,19 +24,18 @@
       });
       
       // Only from server
-      var counter = 0;
       chat.addMessageEx = function (message) {
-          var $res = $("<li />");
+          var $res = $("<li />").css("display", "none");
           $res.append(message);
           $res.addClass("regularitem");
-          $res.appendTo($('#messagesEx'));
+          $res.appendTo($('#messagesEx')).slideDown();
 
-          if (counter > 5) {
-              $('#messagesEx li').eq(counter - 6).slideUp();
+          if ($("#messagesEx li").size() > 7) {
+              $('#messagesEx li').first().next().slideUp();
+              $('#messagesEx li').first().remove();
           }
-          // $('#messagesEx li:first').slideUp(function () { $(this).appendTo($('#messagesEx')).slideDown(); });
-          counter++;
       };
+
       $('#msgExFlow').show();
 
       // Start the connection
