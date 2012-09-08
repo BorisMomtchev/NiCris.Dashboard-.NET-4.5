@@ -30,7 +30,7 @@
 
           // Prep the li element
           var $res = $("<li />").css("display", "none");
-          $res.append(bizMsgExObj.EntityValue + " -- " + bizMsgExObj.User + " -- " + new Date(bizMsgExObj.Date).toUTCString());
+          $res.append(bizMsgExObj.EntityValue + " -- " + bizMsgExObj.EntityStatus  + " -- " + bizMsgExObj.User + " -- " + new Date(bizMsgExObj.Date).toUTCString());
           $res.addClass("regularitem");
           $res.appendTo($('#messagesEx')).slideDown();
 

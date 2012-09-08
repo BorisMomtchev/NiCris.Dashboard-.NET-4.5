@@ -18,8 +18,13 @@ namespace NiCris.DataAccess.SQL.Mappers
 
                 EntityName = entity.EntityName,
                 EntityAction = entity.EntityAction,
-                EntityValue = entity.EntityValue,
+
                 EntityType = entity.EntityType,
+                EntityValue = entity.EntityValue,
+
+                EntityStatus = entity.EntityStatus,
+                EntityErrorMessage = entity.EntityErrorMessage,
+                EntityStackTrace = entity.EntityStackTrace,
 
                 Date = entity.Date,
                 User = entity.User,
@@ -48,8 +53,13 @@ namespace NiCris.DataAccess.SQL.Mappers
 
                 EntityName = model.EntityName,
                 EntityAction = model.EntityAction,
-                EntityValue = model.EntityValue,
+
                 EntityType = model.EntityType,
+                EntityValue = model.EntityValue,
+
+                EntityStatus = model.EntityStatus,
+                EntityErrorMessage = model.EntityErrorMessage,
+                EntityStackTrace = model.EntityStackTrace,
 
                 Date = model.Date,
                 User = model.User,

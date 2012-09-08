@@ -12,8 +12,12 @@ namespace NiCris.BusinessObjects
         public string EntityAction { get; set; }
 
         // *** Derived at Runtime
-        public string EntityValue { get; set; }
         public string EntityType { get; set; }
+        public string EntityValue { get; set; }
+
+        public string EntityStatus { get; set; }
+        public string EntityErrorMessage { get; set; }
+        public string EntityStackTrace { get; set; }
 
         public DateTime Date { get; set; }
         public string User { get; set; }

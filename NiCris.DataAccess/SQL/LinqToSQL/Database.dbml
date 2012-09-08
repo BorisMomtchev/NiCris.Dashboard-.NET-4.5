@@ -19,8 +19,11 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="EntityName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="EntityAction" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="EntityValue" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
       <Column Name="EntityType" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="EntityValue" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="EntityStatus" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="EntityErrorMessage" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="EntityStackTrace" Type="System.String" DbType="NVarChar(2048)" CanBeNull="true" />
       <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="[User]" Member="User" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Serial" Type="System.Int32" DbType="Int" CanBeNull="true" />

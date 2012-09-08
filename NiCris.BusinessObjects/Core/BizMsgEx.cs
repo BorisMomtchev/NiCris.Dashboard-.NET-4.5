@@ -22,15 +22,16 @@ namespace NiCris.BusinessObjects
 
 
         // *** Derived at Runtime
-        public string EntityValue { get; set; }
-
         [Required(ErrorMessage = "EntityType is required.")]
         public string EntityType { get; set; }
+        public string EntityValue { get; set; }
 
+        public string EntityStatus { get; set; }
+        public string EntityErrorMessage { get; set; }
+        public string EntityStackTrace { get; set; }
 
         [Required(ErrorMessage = "Date is required.")]
         public DateTime Date { get; set; }
-
         [Required(ErrorMessage = "User is required.")]
         public string User { get; set; }
 

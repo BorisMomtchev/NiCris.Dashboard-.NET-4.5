@@ -44,8 +44,12 @@ namespace NiCris.Web.Controllers
             bizMsgEx.EntityName = bizMsgExDTO.EntityName;
             bizMsgEx.EntityAction = bizMsgExDTO.EntityAction;
 
-            bizMsgEx.EntityValue = bizMsgExDTO.EntityValue;
             bizMsgEx.EntityType = bizMsgExDTO.EntityType;
+            bizMsgEx.EntityValue = bizMsgExDTO.EntityValue;
+
+            bizMsgEx.EntityStatus = bizMsgExDTO.EntityStatus;
+            bizMsgEx.EntityErrorMessage = bizMsgExDTO.EntityErrorMessage;
+            bizMsgEx.EntityStackTrace = bizMsgExDTO.EntityStackTrace;
 
             bizMsgEx.Date = bizMsgExDTO.Date;
             bizMsgEx.User = bizMsgExDTO.User;

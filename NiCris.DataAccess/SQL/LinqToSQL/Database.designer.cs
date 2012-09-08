@@ -322,7 +322,7 @@ namespace NiCris.DataAccess.SQL.LinqToSQL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rowversion", AutoSync=AutoSync.Always, DbType="rowversion", CanBeNull=true, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rowversion", AutoSync=AutoSync.Always, DbType="rowversion", IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary rowversion
 		{
 			get
@@ -375,9 +375,15 @@ namespace NiCris.DataAccess.SQL.LinqToSQL
 		
 		private string _EntityAction;
 		
+		private string _EntityType;
+		
 		private string _EntityValue;
 		
-		private string _EntityType;
+		private string _EntityStatus;
+		
+		private string _EntityErrorMessage;
+		
+		private string _EntityStackTrace;
 		
 		private System.DateTime _Date;
 		
@@ -409,10 +415,16 @@ namespace NiCris.DataAccess.SQL.LinqToSQL
     partial void OnEntityNameChanged();
     partial void OnEntityActionChanging(string value);
     partial void OnEntityActionChanged();
-    partial void OnEntityValueChanging(string value);
-    partial void OnEntityValueChanged();
     partial void OnEntityTypeChanging(string value);
     partial void OnEntityTypeChanged();
+    partial void OnEntityValueChanging(string value);
+    partial void OnEntityValueChanged();
+    partial void OnEntityStatusChanging(string value);
+    partial void OnEntityStatusChanged();
+    partial void OnEntityErrorMessageChanging(string value);
+    partial void OnEntityErrorMessageChanged();
+    partial void OnEntityStackTraceChanging(string value);
+    partial void OnEntityStackTraceChanged();
     partial void OnDateChanging(System.DateTime value);
     partial void OnDateChanged();
     partial void OnUserChanging(string value);
@@ -500,6 +512,26 @@ namespace NiCris.DataAccess.SQL.LinqToSQL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EntityType", DbType="NVarChar(256) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string EntityType
+		{
+			get
+			{
+				return this._EntityType;
+			}
+			set
+			{
+				if ((this._EntityType != value))
+				{
+					this.OnEntityTypeChanging(value);
+					this.SendPropertyChanging();
+					this._EntityType = value;
+					this.SendPropertyChanged("EntityType");
+					this.OnEntityTypeChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EntityValue", DbType="NVarChar(1024)", UpdateCheck=UpdateCheck.Never)]
 		public string EntityValue
 		{
@@ -520,22 +552,62 @@ namespace NiCris.DataAccess.SQL.LinqToSQL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EntityType", DbType="NVarChar(256) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string EntityType
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EntityStatus", DbType="NVarChar(50)", UpdateCheck=UpdateCheck.Never)]
+		public string EntityStatus
 		{
 			get
 			{
-				return this._EntityType;
+				return this._EntityStatus;
 			}
 			set
 			{
-				if ((this._EntityType != value))
+				if ((this._EntityStatus != value))
 				{
-					this.OnEntityTypeChanging(value);
+					this.OnEntityStatusChanging(value);
 					this.SendPropertyChanging();
-					this._EntityType = value;
-					this.SendPropertyChanged("EntityType");
-					this.OnEntityTypeChanged();
+					this._EntityStatus = value;
+					this.SendPropertyChanged("EntityStatus");
+					this.OnEntityStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EntityErrorMessage", DbType="NVarChar(1024)", UpdateCheck=UpdateCheck.Never)]
+		public string EntityErrorMessage
+		{
+			get
+			{
+				return this._EntityErrorMessage;
+			}
+			set
+			{
+				if ((this._EntityErrorMessage != value))
+				{
+					this.OnEntityErrorMessageChanging(value);
+					this.SendPropertyChanging();
+					this._EntityErrorMessage = value;
+					this.SendPropertyChanged("EntityErrorMessage");
+					this.OnEntityErrorMessageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EntityStackTrace", DbType="NVarChar(2048)", UpdateCheck=UpdateCheck.Never)]
+		public string EntityStackTrace
+		{
+			get
+			{
+				return this._EntityStackTrace;
+			}
+			set
+			{
+				if ((this._EntityStackTrace != value))
+				{
+					this.OnEntityStackTraceChanging(value);
+					this.SendPropertyChanging();
+					this._EntityStackTrace = value;
+					this.SendPropertyChanged("EntityStackTrace");
+					this.OnEntityStackTraceChanged();
 				}
 			}
 		}
@@ -720,7 +792,7 @@ namespace NiCris.DataAccess.SQL.LinqToSQL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rowversion", AutoSync=AutoSync.Always, DbType="rowversion", CanBeNull=true, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rowversion", AutoSync=AutoSync.Always, DbType="rowversion", IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary rowversion
 		{
 			get

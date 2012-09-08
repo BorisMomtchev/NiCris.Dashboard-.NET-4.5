@@ -19,8 +19,12 @@ namespace NiCris.Client.BusinessStream.Aspects
         public string EntityAction { get; set; }
 
         // *** Derived at Runtime
-        public string EntityValue { get; set; }
         public string EntityType { get; set; }
+        public string EntityValue { get; set; }
+
+        public string EntityStatus { get; set; }
+        public string EntityErrorMessage { get; set; }
+        public string EntityStackTrace { get; set; }
 
         public DateTime Date { get; set; }
         public string User { get; set; }
@@ -43,20 +47,59 @@ namespace NiCris.Client.BusinessStream.Aspects
 
             this.Date = DateTime.Now;
             this.User = string.IsNullOrEmpty(WindowsIdentity.GetCurrent().Name) ? "Empty" : WindowsIdentity.GetCurrent().Name;
+        }
 
-            Trace.WriteLine(string.Format("EntityName: {0}, EntityAction: {1}", this.EntityName, this.EntityAction));
-            Trace.WriteLine(string.Format("EntityValue: {0}, EntityType: {1}, Date: {2}, User: {3}", this.EntityValue, this.EntityType, Date.ToString(), User));
-            Trace.WriteLine("---\n");
+
+        // This method is executed at runtime inside your application, when target methods exit with success
+        public override void OnSuccess(MethodExecutionArgs args)
+        {
+            // Trace.WriteLine(MethodName + " - OnSuccess");
 
             var bizMsgExDTO = new BizMsgExDTO
             {
                 EntityName = this.EntityName,
                 EntityAction = this.EntityAction,
-                EntityValue = this.EntityValue,
+
                 EntityType = this.EntityType,
+                EntityValue = this.EntityValue,
+
+                EntityStatus = "Success",
+
                 Date = this.Date,
                 User = this.User
             };
+
+            Trace.WriteLine(string.Format("EntityName: {0}, EntityAction: {1}", this.EntityName, this.EntityAction));
+            Trace.WriteLine(string.Format("EntityValue: {0}, EntityType: {1}, Date: {2}, User: {3}", this.EntityValue, this.EntityType, Date.ToString(), User));
+            Trace.WriteLine("---\n");
+
+            HttpHelper.RunClient(bizMsgExDTO);
+        }
+
+        // This method is executed at runtime inside your application, when target methods exit with an exception
+        public override void OnException(MethodExecutionArgs args)
+        {
+            // Trace.WriteLine(MethodName + " - OnException\n" + args.Exception.Message);
+
+            var bizMsgExDTO = new BizMsgExDTO
+            {
+                EntityName = this.EntityName,
+                EntityAction = this.EntityAction,
+
+                EntityType = this.EntityType,
+                EntityValue = this.EntityValue,
+
+                EntityStatus =  "Error",
+                EntityErrorMessage = args.Exception.Message,
+                EntityStackTrace = args.Exception.StackTrace,
+
+                Date = this.Date,
+                User = this.User
+            };
+
+            Trace.WriteLine(string.Format("EntityName: {0}, EntityAction: {1}", this.EntityName, this.EntityAction));
+            Trace.WriteLine(string.Format("EntityValue: {0}, EntityType: {1}, Date: {2}, User: {3}", this.EntityValue, this.EntityType, Date.ToString(), User));
+            Trace.WriteLine("---\n");
 
             HttpHelper.RunClient(bizMsgExDTO);
         }
