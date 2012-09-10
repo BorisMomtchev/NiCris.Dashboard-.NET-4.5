@@ -19,7 +19,7 @@
           $res.appendTo($('#messagesEx')).slideDown();
 
           // slideUp & remove from DOM logic
-          if ($("#messagesEx li").size() > 7) {
+          if ($("#messagesEx li").size() > 8) {
               $('#messagesEx li').first().next().slideUp();
               $('#messagesEx li').first().remove();
           }
@@ -32,12 +32,11 @@
   });
   </script>
 
-
-<div class="page-header">
-  <h1><small>Live Biz Stream</small></h1>
+<div style="padding-top:-10px">
+    <h1><small>Biz Stream</small></h1>
 </div>
 
-<table><tr>
+<table style="padding-top: 0px"><tr>
     <td style="vertical-align:top">
         @* Control Panel *@
         <div class="btn-group btn-group-vertical">
@@ -69,12 +68,12 @@
     }
 
     .ticker li {
-	    height: 40px;
+	    height: 70px;
 	    border-bottom: 1px dotted #DDD;
 	    padding: 5px;
 	    margin: 0px 5px;
         font-size: larger;
-        font-weight: bold;
+        font-weight:lighter;
 	    box-shadow: 0px 0px 5px #DDD;
     }
 
@@ -83,7 +82,7 @@
     }
 
     #messagesEx li {
-	    height: 40px;
+	    height: 70px;
 	    overflow: hidden;
     }
 
@@ -99,6 +98,7 @@
         background-image: -webkit-linear-gradient(left top, rgb(245,37,172) 17%, rgb(152,71,222) 59%);
         background-image: -ms-linear-gradient(left top, rgb(245,37,172) 17%, rgb(152,71,222) 59%);
 
+        /*
         background-image: -webkit-gradient(
           linear,
           left top,
@@ -106,6 +106,22 @@
           color-stop(0.17, rgb(245,37,172)),
           color-stop(0.59, rgb(152,71,222))
         );
+        */
+
+        /* background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#D4D4D4), to(#D4D4D4), color-stop(.6,#C2C2C2)); */
+        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#DEDEDE), to(#DEDEDE), color-stop(.5,#BFBFBF));
+        box-shadow: 0px 0px 20px #000000;
+        border-style:ridge;
+        border-bottom-width:thin;
+
+        /*
+        border-radius: 50px;
+        box-shadow: 0px 0px 20px #000000;
+        background-image: -webkit-linear-gradient(top, #ffffff, #000000);
+        background-image: linear-gradient(top, #ffffff, #000000);
+        background-clip: padding-box;
+        opacity: 0.68;
+        */
 
         -webkit-border-radius: 10px;
         -moz-border-radius: 15px;
