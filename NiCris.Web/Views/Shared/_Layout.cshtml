@@ -17,8 +17,17 @@
         <script src="/signalr/hubs" type="text/javascript"></script>
        
        <style>
-          body { padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */ }
-          .aligntobottom { bottom:0; position:absolute; }
+           body {
+               padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+           }
+           .aligntobottom {
+               bottom: 0;
+               position: absolute;
+           }
+           footer.container.navbar-fixed-top {
+               top: auto;
+               bottom: 9px;
+           }
        </style>
     </head>
 
@@ -60,19 +69,18 @@
         }
 
         @RenderBody()
-    </div>
 
-    @*<footer>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p>&copy; @DateTime.Now.Year - NiCris Dashboard®</p>
-            </div>
-        </div>
-    </footer>*@
+        <footer class="container navbar navbar-fixed-top">  
+            <hr><p>© NiCris Dashboard 2012</p>  
+        </footer> 
+    </div>
 
      @*@Scripts.Render("~/bundles/jquery")*@
      @Scripts.Render("~/Scripts/Bootstrap")
      @RenderSection("scripts", required: false)
 
     </body>
+
 </html>
+
+
