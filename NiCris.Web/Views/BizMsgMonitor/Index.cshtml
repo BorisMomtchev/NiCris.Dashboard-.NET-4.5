@@ -34,16 +34,28 @@
 
 
 <div class="page-header">
-  <h1><small>Live BizMsg Stream</small></h1>
+  <h1><small>Live Biz Stream</small></h1>
 </div>
 
-@* Business Stream *@
-<div id="page">
-    <span id="msgExFlow">
-        <ul id="messagesEx" class="ticker"></ul>
-    </span>
-</div>
-
+<table><tr>
+    <td style="vertical-align:top">
+        @* Control Panel *@
+        <div class="btn-group btn-group-vertical">
+            <button class="btn" id="pause"><i class="icon-pause icon-black"></i></button>
+            <button class="btn" id="step-backward"><i class="icon-step-backward icon-black"></i></button>
+            <button class="btn" id="step-forward"><i class="icon-step-forward icon-black"></i></button>
+            <button class="btn" id="play"><i class="icon-play icon-black"></i></button>
+        </div>
+    </td>
+    <td>
+        @* Business Stream *@
+        <div id="page">
+            <span id="msgExFlow">
+                <ul id="messagesEx" class="ticker"></ul>
+            </span>
+        </div>
+    </td>
+</tr></table>
 
 <style>
     #page {
