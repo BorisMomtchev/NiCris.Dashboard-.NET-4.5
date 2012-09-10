@@ -1,30 +1,14 @@
 ﻿@{
-    ViewBag.Title = "Chat";
+    ViewBag.Title = "BizMsgMonitor";
 }
-
-<h2>Chat</h2>
-
-  <script src="~/Scripts/jquery-1.8.0.min.js" type="text/javascript"></script>
-  <script src="~/Scripts/jquery.signalR-0.5.3.min.js" type="text/javascript"></script>
-  <script src="/signalr/hubs" type="text/javascript"></script>
 
   <script type="text/javascript">
   $(function () {
       // Proxy created on the fly
-      var chat = $.connection.chat;
-      
-      // Declare a function on the chat hub so the server can invoke it
-      chat.addMessage = function(message) {
-          $('#messages').append('<li>' + message + '</li>');
-      };
-      
-      $("#broadcast").click(function () {
-          // Call the chat method on the server
-          chat.send($('#msg').val());
-      });
+      var bizMsgConn = $.connection.chat;
       
       // Only from server
-      chat.addMessageEx = function (bizMsgEx) {
+      bizMsgConn.addMessageEx = function (bizMsgEx) {
           // Parse to json object
           var bizMsgExObj = JSON.parse(bizMsgEx);
 
@@ -47,25 +31,21 @@
       $.connection.hub.start();
   });
   </script>
-  
-  <input type="text" id="msg" />
-  <input type="button" id="broadcast" value="broadcast" />
 
-   @* Chat *@ 
-    <ul id="messages"></ul>
-    <hr/>
 
-  @* Business Stream *@
-    <div id="page">
-        <span id="msgExFlow">
-            <h2>Live Business Stream</h2>
-            <ul id="messagesEx" class="ticker"></ul>
-        </span>
-    </div>
+<div class="page-header">
+  <h1><small>Live BizMsg Stream</small></h1>
+</div>
+
+@* Business Stream *@
+<div id="page">
+    <span id="msgExFlow">
+        <ul id="messagesEx" class="ticker"></ul>
+    </span>
+</div>
 
 
 <style>
-
     #page {
 	    width: 900px;
 	    margin: 0 auto;
@@ -119,7 +99,6 @@
         -moz-border-radius: 15px;
         border-radius: 15px;
     }
-
 </style>
 
 @*https://github.com/SignalR/SignalR/wiki/QuickStart-Hubs*@

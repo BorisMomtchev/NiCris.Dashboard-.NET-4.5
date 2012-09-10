@@ -25,11 +25,5 @@ namespace NiCris.Web.Controllers
             ViewBag.Message = "Your contact page.";
             return View();
         }
-
-        public ActionResult Chat()
-        {
-            ViewBag.Message = "Your chat page.";
-            return View();
-        }
     }
 }
