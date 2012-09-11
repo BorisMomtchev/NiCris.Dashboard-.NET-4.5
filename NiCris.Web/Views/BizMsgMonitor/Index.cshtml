@@ -9,30 +9,45 @@
       
       // Only from server
       bizMsgConn.addMessageEx = function (bizMsgEx) {
-          // Parse to json object
+
+          // ** parse to json object
           var bizMsgExObj = JSON.parse(bizMsgEx);
 
-          // create the li element
+          // ** create the li element
           var $res = $("<li />").css("display", "none");
-          // $res.append(bizMsgExObj.EntityValue + " -- " + bizMsgExObj.EntityStatus  + " -- " + bizMsgExObj.User + " -- " + new Date(bizMsgExObj.Date).toUTCString());
-          $res.append(new Date(bizMsgExObj.Date).toUTCString()).css("font-size", "small");
-          // $res.append(bizMsgExObj.User).css("color", "red");
-          // $res.append(new Date(bizMsgExObj.Date).toUTCString());
           $res.addClass("regularitem");
 
-          // prep the right img for the li element, depending on the msg type
+          // * add the date in the upper left corner
+          $res.append(new Date(bizMsgExObj.Date).toUTCString()).css("font-size", "small");
+
+          // * add the appropriate img, depending on the msg type in the top right corner
           var $img = $();
           if (bizMsgExObj.EntityStatus == "Success") {
               $img = $('<img id="success" src="/Content/success.png" />').addClass("pull-right");
           } else {
               $img = $('<img id="success" src="/Content/error.png" />').addClass("pull-right");
           }
-          $res.prepend($img);      
+          $res.prepend($img);
 
-          // add the li element to the ul
+          // ** add the value in the middle
+          var $value = $("<div />").addClass("pull-middle");
+          $value.append("value: " + bizMsgExObj.EntityValue + " • type: " + bizMsgExObj.EntityType + " • action: " + bizMsgExObj.EntityAction);
+          $res.append($value);
+
+          // * add the error if present
+          var $err = $("<div />").addClass("pull-down-right");
+          $err.append(bizMsgExObj.EntityErrorMessage);
+          $res.append($err);
+
+          // * add the user in the bottom left corner
+          var $user = $("<div />").addClass("pull-down");
+          $user.append(bizMsgExObj.User);
+          $res.append($user);
+
+          // ** add the li element to the ul
           $res.appendTo($('#messagesEx')).slideDown();
          
-          // slideUp & remove from DOM logic
+          // ** slideUp & remove from DOM logic
           if ($("#messagesEx li").size() > 7) {
               $('#messagesEx li').first().next().slideUp();
               $('#messagesEx li').first().remove();
@@ -71,8 +86,18 @@
 </tr></table>
 
 <style>
+    .pull-middle {
+        position: relative; left: 50px; padding-top: 8px; font-size: medium;
+        color: #757575;
+    }
 
-    .pull-down{position:absolute;left:0;bottom:0}
+    .pull-down {
+        position: relative; left: 0px; padding-top: 7px;
+    }
+
+    .pull-down-right {
+       position: relative; float: right; padding-top: 5px;
+    }
 
     #page {
 	    width: 900px;
@@ -137,6 +162,7 @@
         /* text-shadow: 1px 1px 3px #666, -1px -1px 3px #FFF, 1px 1px #666, -1px -1px #FFF; */
         text-shadow: -1px -1px #667, 1px 1px #FFF;
         color: #D9D9D9;
+        font-size: small;
 
         /*
         border-radius: 50px;

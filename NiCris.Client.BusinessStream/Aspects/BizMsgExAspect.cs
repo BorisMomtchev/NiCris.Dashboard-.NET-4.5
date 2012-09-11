@@ -43,7 +43,8 @@ namespace NiCris.Client.BusinessStream.Aspects
             Type oType = args.Method.GetParameters()[0].ParameterType;
 
             this.EntityValue = args.Method.DeclaringType.GetProperty(EntityName).GetValue(oVal, null).ToString();
-            this.EntityType = oType.ToString();
+            // this.EntityType = oType.ToString();
+            this.EntityType = args.Method.DeclaringType.Name;
 
             this.Date = DateTime.Now;
             this.User = string.IsNullOrEmpty(WindowsIdentity.GetCurrent().Name) ? "Empty" : WindowsIdentity.GetCurrent().Name;
