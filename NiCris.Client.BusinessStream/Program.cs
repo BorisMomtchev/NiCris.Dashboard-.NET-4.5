@@ -14,7 +14,7 @@ namespace NiCris.Client.BusinessStream
             for (int i = 0; i < 20; i++)
             {
                 var patient = new Patient2("FullName: " + i.ToString(), i + 20, DateTime.Now.AddYears(-i));
-                var device = new Device2("Serial: " + i.ToString(), DateTime.Now.AddYears(-i * 2));
+                var device = new Device2(i.ToString(), DateTime.Now.AddYears(-i * 2));
 
                 Patient2.Save(patient);
                 Device2.Update(device);
@@ -39,7 +39,7 @@ namespace NiCris.Client.BusinessStream
         [TimingAspect]
         public static void Save(Patient2 patient)
         {
-            Thread.Sleep(500);
+            Thread.Sleep(2000);
         }
     }
 
@@ -58,7 +58,9 @@ namespace NiCris.Client.BusinessStream
         [TimingAspect]
         public static void Update(Device2 device)
         {
-            Thread.Sleep(500);
+            Thread.Sleep(1000);
+            if (int.Parse(device.Serial) % 2 == 0)
+                throw new Exception("Some exception...");
         }
     }
 }

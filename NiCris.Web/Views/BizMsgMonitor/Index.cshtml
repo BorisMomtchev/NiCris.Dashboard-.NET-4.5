@@ -12,14 +12,28 @@
           // Parse to json object
           var bizMsgExObj = JSON.parse(bizMsgEx);
 
-          // Prep the li element
+          // create the li element
           var $res = $("<li />").css("display", "none");
-          $res.append(bizMsgExObj.EntityValue + " -- " + bizMsgExObj.EntityStatus  + " -- " + bizMsgExObj.User + " -- " + new Date(bizMsgExObj.Date).toUTCString());
+          // $res.append(bizMsgExObj.EntityValue + " -- " + bizMsgExObj.EntityStatus  + " -- " + bizMsgExObj.User + " -- " + new Date(bizMsgExObj.Date).toUTCString());
+          $res.append(new Date(bizMsgExObj.Date).toUTCString()).css("font-size", "small");
+          // $res.append(bizMsgExObj.User).css("color", "red");
+          // $res.append(new Date(bizMsgExObj.Date).toUTCString());
           $res.addClass("regularitem");
-          $res.appendTo($('#messagesEx')).slideDown();
 
+          // prep the right img for the li element, depending on the msg type
+          var $img = $();
+          if (bizMsgExObj.EntityStatus == "Success") {
+              $img = $('<img id="success" src="/Content/success.png" />').addClass("pull-right");
+          } else {
+              $img = $('<img id="success" src="/Content/error.png" />').addClass("pull-right");
+          }
+          $res.prepend($img);      
+
+          // add the li element to the ul
+          $res.appendTo($('#messagesEx')).slideDown();
+         
           // slideUp & remove from DOM logic
-          if ($("#messagesEx li").size() > 8) {
+          if ($("#messagesEx li").size() > 7) {
               $('#messagesEx li').first().next().slideUp();
               $('#messagesEx li').first().remove();
           }
@@ -57,6 +71,9 @@
 </tr></table>
 
 <style>
+
+    .pull-down{position:absolute;left:0;bottom:0}
+
     #page {
 	    width: 900px;
 	    margin: 0 auto;
@@ -109,10 +126,17 @@
         */
 
         /* background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#D4D4D4), to(#D4D4D4), color-stop(.6,#C2C2C2)); */
-        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#DEDEDE), to(#DEDEDE), color-stop(.5,#BFBFBF));
-        box-shadow: 0px 0px 20px #000000;
-        border-style:ridge;
-        border-bottom-width:thin;
+        /* background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#DEDEDE), to(#DEDEDE), color-stop(.5,#BFBFBF)); */
+        /* background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#EEEEEE), to(#EEEEEE), color-stop(.6,#CFCFCF)); */
+        background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#EEEEEE), to(#EEEEEE), color-stop(.6,#D9D9D9));
+        /* box-shadow: 0px 0px 20px #000000; */
+        border-style: ridge;
+        border-bottom-width: thin; 
+
+        /* text-shadow: 0px 1px 2px #555; */
+        /* text-shadow: 1px 1px 3px #666, -1px -1px 3px #FFF, 1px 1px #666, -1px -1px #FFF; */
+        text-shadow: -1px -1px #667, 1px 1px #FFF;
+        color: #D9D9D9;
 
         /*
         border-radius: 50px;

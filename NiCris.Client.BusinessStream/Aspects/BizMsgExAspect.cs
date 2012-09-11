@@ -80,6 +80,7 @@ namespace NiCris.Client.BusinessStream.Aspects
         public override void OnException(MethodExecutionArgs args)
         {
             // Trace.WriteLine(MethodName + " - OnException\n" + args.Exception.Message);
+            args.FlowBehavior = FlowBehavior.Continue;
 
             var bizMsgExDTO = new BizMsgExDTO
             {
