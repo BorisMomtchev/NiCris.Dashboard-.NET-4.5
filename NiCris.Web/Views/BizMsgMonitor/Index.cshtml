@@ -6,9 +6,29 @@
   $(function () {
       // Proxy created on the fly
       var bizMsgConn = $.connection.chat;
+      var counter = 0;
+
+      // Control buttons
+      var pause = false;
+      $('button').on('click', function () {
+          var $this = $(this);
+          var op = $this.data('op');
+          pause = (op == "pause");
+
+          $this
+              .siblings('button')
+                  .removeAttr('disabled')
+                  .end()
+              .attr('disabled', 'disabled');
+      });
       
       // Only from server
       bizMsgConn.addMessageEx = function (bizMsgEx) {
+
+          counter++;
+          $("#numOfMsgs").text(counter);
+
+          if (pause) { return; }
 
           // ** parse to json object
           var bizMsgExObj = JSON.parse(bizMsgEx);
@@ -69,11 +89,10 @@
     <td style="vertical-align:top">
         @* Control Panel *@
         <div class="btn-group btn-group-vertical">
-            <button class="btn" id="pause"><i class="icon-pause icon-black"></i></button>
-            <button class="btn" id="step-backward"><i class="icon-step-backward icon-black"></i></button>
-            <button class="btn" id="step-forward"><i class="icon-step-forward icon-black"></i></button>
-            <button class="btn" id="play"><i class="icon-play icon-black"></i></button>
-        </div>
+            <button class="btn"  data-op="play" disabled="disabled"><i class="icon-play icon-black"></i></button>
+            <button class="btn"  data-op="pause"><i class="icon-pause icon-black"></i></button>
+        </div><br/><br/>
+        <span id="numOfMsgs" class="badge badge-inverse">--</span>
     </td>
     <td>
         @* Business Stream *@
