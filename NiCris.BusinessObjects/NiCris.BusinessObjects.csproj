@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Core\BizMsg.cs" />
     <Compile Include="Core\BizMsgEx.cs" />
+    <Compile Include="Core\TaskEx.cs" />
     <Compile Include="DTO\BizMsgDTO.cs" />
     <Compile Include="DTO\BizMsgExDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
