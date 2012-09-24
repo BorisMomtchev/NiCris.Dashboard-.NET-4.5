@@ -1,38 +1,79 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>NiCris Dashboard - @ViewBag.Title</title>
+<head>
+    <meta charset="utf-8" />
+    <title>NiCris Dashboard - @ViewBag.Title</title>
 
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
 
-        @* @Styles.Render("~/Content/css") *@
-        @Styles.Render("~/Content/Bootstrap")
-        @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/Bootstrap")
+    @Scripts.Render("~/bundles/modernizr")
 
-        @*TEMP - just to make SignalR happy*@
-        <script src="~/Scripts/jquery-1.8.0.min.js" type="text/javascript"></script>
-        <script src="~/Scripts/jquery.signalR-0.5.3.min.js" type="text/javascript"></script>
-        <script src="/signalr/hubs" type="text/javascript"></script>
-       
-       <style>
-           body {
-               padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-               background: none repeat scroll 0 0 #EEE;
-           }
-           .aligntobottom {
-               bottom: 0;
-               position: absolute;
-           }
-           footer.container.navbar-fixed-top {
-               top: auto;
-               bottom: 9px;
-           }
-       </style>
-    </head>
+    <link href="@Url.Content("~/Content/themes/redmond/jquery-ui-1.8.16.custom.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Scripts/jtable/themes/standard/blue/jtable_blue.css")" rel="stylesheet" type="text/css" />
 
-    <body>
+    <script src="@Url.Content("~/Scripts/jquery-1.8.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.23.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jtable/jquery.jtable.min.js")" type="text/javascript"></script>
+
+    <script src="~/Scripts/jquery.signalR-0.5.3.min.js" type="text/javascript"></script>
+    <script src="/signalr/hubs" type="text/javascript"></script>
+
+    <style>
+        body {
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+            background: none repeat scroll 0 0 #EEE;
+        }
+
+        .aligntobottom {
+            bottom: 0;
+            position: absolute;
+        }
+
+        footer.container.navbar-fixed-top {
+            top: auto;
+            bottom: 9px;
+        }
+
+        div.rectangular-area {
+            border: 1px solid #999;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            padding: 10px;
+            background-color: #EEE;
+        }
+
+        #TableUpdates {
+            height: 200px;
+            overflow: auto;
+        }
+
+        .event-deleted {
+            color: Red;
+        }
+
+        .event-updated {
+            color: green;
+        }
+
+        .event-created {
+            color: blue;
+        }
+
+        .event-message {
+            color: rgb(117, 117, 117);
+        }
+
+        p.demo-info {
+            font-size: 12px;
+            color: rgb(44, 50, 230);
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
 
     <div class="navbar navbar-fixed-top navbar-inverse">
         <div class="navbar-inner">
@@ -43,24 +84,26 @@
                     <span class="icon-bar"></span>
                 </a>
                 <a class="brand" style="padding:4px 5px 0px 0px" href="@Url.Action("Index", "Home")">
-                    <span><img src="@Url.Content("~/Content/logo.png")" alt="logo" border="0"/></span>
+                    <span>
+                        <img src="@Url.Content("~/Content/logo.png")" alt="logo" border="0"/></span>
                 </a>
                 <div class="nav-collapse">
                     <ul class="nav">
                         <li>@Html.ActionLink("Biz", "Index", "BizMsgMonitor")</li>
                         <li>@Html.ActionLink("Chat", "Index", "Chat")</li>
+                        <li>@Html.ActionLink("Dashboard", "Index", "Task")</li>
                     </ul>
                 </div>
 
                 <form class="navbar-search pull-left">
-                  <input type="text" class="search-query" placeholder="Search">
+                    <input type="text" class="search-query" placeholder="Search">
                 </form>
 
                 <!--/.nav-collapse -->
-                <ul class="nav pull-right">  
+                <ul class="nav pull-right">
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li style="padding-top:10px;padding-left:15px"> <i class="icon-user icon-white"></i> @User.Identity.Name</li>
+                    <li style="padding-top: 10px; padding-left: 15px"><i class="icon-user icon-white"></i>@User.Identity.Name</li>
                 </ul>
             </div>
         </div>
@@ -76,16 +119,17 @@
 
         @RenderBody()
 
-        <footer class="container navbar navbar-fixed-top">  
-            <hr><p>© NiCris Dashboard 2012</p>  
-        </footer> 
+        <footer class="container navbar navbar-fixed-top">
+            <hr>
+            <p>© NiCris Dashboard 2012</p>
+        </footer>
     </div>
 
-     @*@Scripts.Render("~/bundles/jquery")*@
-     @Scripts.Render("~/Scripts/Bootstrap")
-     @RenderSection("scripts", required: false)
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @Scripts.Render("~/Scripts/Bootstrap")
+    @RenderSection("scripts", required: false)
 
-    </body>
+</body>
 
 </html>
 

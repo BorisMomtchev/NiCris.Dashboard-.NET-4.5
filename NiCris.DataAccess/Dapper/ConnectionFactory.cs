@@ -12,7 +12,7 @@ namespace NiCris.DataAccess.Dapper
     {
         public static DbConnection GetOpenConnection()
         {
-            var connStringName = ConfigurationManager.AppSettings.Get("NiCrisConnectionStringName");
+            var connStringName = ConfigurationManager.AppSettings.Get("NiCrisCeConnectionStringName");
             var connString = ConfigurationManager.ConnectionStrings[connStringName].ConnectionString;
             var conn = new SqlCeConnection(connString);
             // var conn = new SqlConnection(connString);
